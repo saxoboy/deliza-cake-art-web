@@ -12,11 +12,20 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-postcss`,
+    `gatsby-plugin-offline`,
+    `gatsby-plugin-sitemap`,    
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `bg`,
+        path: `${__dirname}/src/bg`,
       },
     },
     {
@@ -35,8 +44,8 @@ module.exports = {
       resolve: `gatsby-source-strapi`,
       options: {
         apiURL: process.env.API_URL || `http://localhost:1337`,
-        queryLimit: 1000, // Default to 100
-        contentTypes: [`categoria`, `pastel`],
+        queryLimit: 1000,
+        contentTypes: [`categorias`, `pasteles`, `paginas`, `testimonios`],
         //singleTypes: [`siteConfig`],
         // Possibility to login with a strapi user, when content types are not publically available (optional).
         // loginData: {
@@ -45,8 +54,16 @@ module.exports = {
         // },
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `ABeeZee`,
+          `source sans pro\:300,400,400i,700`,
+          `Merienda One`, // you can also specify font weights and styles
+        ],
+        display: "swap",
+      },
+    },
   ],
 }
